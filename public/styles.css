@@ -1,0 +1,453 @@
+/* GEN Z AESTHETIC CLOCK SUITE - Glassmorphism + Pastel/Neon */
+
+:root {
+  --font-family: "Poppins", "Arial", sans-serif;
+  --radius: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Light Mode - Pastel Dream */
+  --color-bg: linear-gradient(135deg, #fdfbfb 0%, #f7f3e9 100%);
+  --color-fg: #2d2d2d;
+  --color-primary: #c084fc;
+  --color-accent: #f0ab8e;
+  --color-secondary: #6ee7b7;
+  --color-border: rgba(255, 255, 255, 0.5);
+  --color-card-bg: rgba(255, 255, 255, 0.3);
+  --glow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glow-hover: 0 12px 48px rgba(192, 132, 252, 0.25);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  line-height: 1.5;
+  backdrop-filter: blur(0px);
+}
+
+/* DARK MODE - Neon Dream */
+body.dark {
+  --color-bg: linear-gradient(135deg, #0f0c29 0%, #1a1a2e 50%, #16213e 100%);
+  --color-fg: #e0e0e0;
+  --color-primary: #00f2fe;
+  --color-accent: #ff0844;
+  --color-secondary: #4facfe;
+  --color-border: rgba(255, 255, 255, 0.15);
+  --color-card-bg: rgba(15, 25, 45, 0.5);
+  --glow: 0 8px 32px rgba(0, 242, 254, 0.15);
+  --glow-hover: 0 12px 48px rgba(0, 242, 254, 0.35);
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+}
+
+.time-display {
+  font-family: "Orbitron", monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #c084fc, #f0ab8e, #6ee7b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeIn 0.5s ease;
+  letter-spacing: 2px;
+}
+
+body.dark .time-display {
+  background: linear-gradient(135deg, #00f2fe, #ff0844, #4facfe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+
+.tab {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(12px);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+  padding: 0.7rem 1.6rem;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+}
+
+.tab:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-hover);
+  border-color: var(--color-primary);
+}
+
+.tab.active {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  color: white;
+  border-color: transparent;
+  box-shadow: var(--glow-hover);
+}
+
+.content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.panel {
+  background: var(--color-card-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--glow);
+  transition: var(--transition);
+}
+
+.panel:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-hover);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .panel {
+    flex: 1;
+    min-width: 280px;
+  }
+}
+
+/* Button Styling */
+.button {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  cursor: pointer;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+}
+
+.button:active::before {
+  width: 200px;
+  height: 200px;
+}
+
+.input,
+input[type="number"],
+input[type="text"],
+input[type="time"] {
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  margin: 0.25rem;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  width: auto;
+}
+
+body.dark .input,
+body.dark input[type="number"],
+body.dark input[type="text"],
+body.dark input[type="time"] {
+  background: rgba(30, 40, 60, 0.85);
+  color: #e0e0e0;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.4);
+  transform: scale(1.01);
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.3px;
+}
+
+/* Timer Display */
+.timer-display {
+  font-family: "Orbitron", monospace;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: 700;
+}
+
+/* Progress Bar */
+.progress-container {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  transition: width 0.2s ease;
+  border-radius: 4px;
+}
+
+/* Stopwatch Display */
+#sw-display {
+  font-family: "Orbitron", monospace;
+  font-size: 2rem;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-card-bg);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+/* Alarm Toast Notification */
+.alarm-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 280px;
+  justify-content: space-between;
+}
+
+.alarm-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Alarm List Cards */
+.alarm-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.alarm-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.alarm-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-hover);
+}
+
+.alarm-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.alarm-card-time {
+  font-family: "Orbitron", monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.alarm-card-label {
+  font-size: 0.8rem;
+  color: var(--color-fg);
+  opacity: 0.7;
+}
+
+.alarm-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* Alarm Form */
+.alarm-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.alarm-form .form-group--inline {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alarm-form .form-group--inline label {
+  margin-bottom: 0;
+}
+
+/* Stopwatch Lap List */
+#sw-lap-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#sw-lap-list li {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-family: "Orbitron", monospace;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+}
+
+#sw-lap-list li:hover {
+  transform: translateX(4px);
+  box-shadow: var(--glow);
+}
+
+/* Mobile button fix */
+@media (max-width: 480px) {
+  .alarm-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .alarm-card-actions {
+    width: 100%;
+  }
+
+  .alarm-card-actions .button {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+/* Timer Presets */
+.timer-presets {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.timer-presets .button {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+}
